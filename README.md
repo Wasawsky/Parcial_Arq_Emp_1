@@ -4,11 +4,9 @@ Arquitecturas Empresariales 2020-2
 
 ## Generalidades
 
-https://warm-thicket-08550.herokuapp.com/inputdata
+https://gentle-atoll-84797.herokuapp.com/inputdata
 
-Este repositorio presenta un ejercicio básico arquitecturas empresariales, usando las herramientas Maven, Heroku, Spark, Git y JAVA para su desarrollo.
-
-Puede encontrar el informe en https://github.com/Wasawsky/Arq_Emp_Taller2/tree/master/src/site/resources
+Este repositorio presenta el primer parcial de arquitecturas empresariales, usando las herramientas Maven, Heroku, Spark, Git y JAVA para su desarrollo.
 
 
 ### Prerrequisitos
@@ -39,10 +37,11 @@ Cuando esté preparado abra un directorio en su computador donde quiera trabajar
 Ejecuta la consola de comandos desde el directorio y escribe en la línea de comandos
 
 ```
-git clone https://github.com/Wasawsky/Arq_Emp_Taller2.git
+git clone https://github.com/Wasawsky/Parcial_Arq_Emp_1.git
+
 ```
 
-Se le creara una carpeta llamada Arq_Emp_Taller1 en el directorio, es este repositorio desde donde trabajara.
+Se le creara una carpeta llamada Parcial_Arq_Emp_1 en el directorio, es este repositorio desde donde trabajara.
 
 Ingrese a la carpeta y ejecute la consola de comandos, o usando un framework de desarrollo abra la carpeta.
 
@@ -60,7 +59,7 @@ Se descargarán librerías que necesitara el proyecto, puede tardar algunos minu
 Si necesita ejecutar localmente el servidor, use el siguiente comando para ejecutarlo desde cmd de Windows
 
 ```
-web: java -cp target/classes;target/dependency/* edu.escuelaing.arep.SparkWebApp
+web: java -cp target/classes;target/dependency/* edu.escuelaing.arep.Spark.SparkWebApp
 ```
 Abra su navegador y busque la direccion web:
 
@@ -79,18 +78,27 @@ http://localhost:5000/inputdata
 
 ### Funcionalidades
 
-Este proyecto, desplegado en heroku, permite calcular la media aritmética de un conjunto de valores, además podemos hallar la desviación estándar de los datos.
-
-![diagram](https://github.com/Wasawsky/Arq_Emp_Taller2/blob/master/src/resources/Capture.JPG)
+Este proyecto, desplegado en heroku, permite calcular el promedio y el ordenamiento de un conjunto de valores.
 
 
 ## Uso
 
-Puede ejecutar el método principal de la clase Calculator.java desde la consola de comandos para iniciar el programa, indique el archivo con los datos que quiere operar y oprima ENTER.
+Puede ejecutar el método principal de la clase Client.java desde la consola de comandos para iniciar el programa, escriba los datos que quiere que el servidor opere y oprima ENTER.
 
-Podrá visualizar la media aritmética de los datos y la desviación estándar de los mismos.
+Podrá visualizar el promedio y los datos organizados.
 
-Si necesita casos de prueba vaya a https://github.com/Wasawsky/Arq_Emp_Taller1/tree/master/src/test/resources/data para ver los casos que se usan en las pruebas. 
+Ejemplo:
+
+```
+Ponga los datos a procesar separados por comas
+1,5,8,6
+Datos a procesar: 1,5,8,6
+{
+  "array" : [ 1.0, 5.0, 6.0, 8.0 ],
+  "sumax" : 20.0,
+  "prom" : 5.0
+}
+```
 
 ## Construido con
 
@@ -98,7 +106,6 @@ Si necesita casos de prueba vaya a https://github.com/Wasawsky/Arq_Emp_Taller1/t
 * [GIT](https://git-scm.com/) - Environment Version Control System
 * [Java](https://www.java.com/es/) - General-purpose programming language
 * [Heroku](https://www.heroku.com) - Cloud platform as a service
-* [Spark](http://sparkjava.com/) - Micro framework for creating web applications
 
 ## Sobre el autor
 
