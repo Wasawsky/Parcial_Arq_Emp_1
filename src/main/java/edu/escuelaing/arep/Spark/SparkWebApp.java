@@ -1,6 +1,10 @@
-package edu.escuelaing.arep;
+package edu.escuelaing.arep.Spark;
 
 import static spark.Spark.*;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import edu.escuelaing.arep.logic.App;
 
 import spark.*;
 
@@ -10,12 +14,19 @@ import spark.*;
  */
 public class SparkWebApp {
 
+    private static App app;
     /**
      * Metodo Principal del programa
      * @param args Argumento
      */
     public static void main(String[] args) {
+
+        //int portSkt = getPort();
+        //System.out.println("Listening on Port: " + portSkt);
+        //port(portSkt);
+        
         port(getPort());
+        app = new App();
         //get("/hello", (req, res) -> "Hello Heroku");
         get("/inputdata", (req, res) -> inputDataPage(req, res));
         get("/processdata", (req, res) -> processDataPage(req, res));
@@ -28,19 +39,31 @@ public class SparkWebApp {
      * @return
      */
     private static String processDataPage(Request req, Response res) {
-        Double[] array = new Double[6];
-        String value = "";
-        for (int i = 0; i<6;i++){
-            value = "number"+(i+1);
-            array[i] = Double.parseDouble(req.queryParams(value));
+
+        String[] list = req.queryParams("value").split(",");
+        prepareData(list);
+
+        app.bubbleSortNumbers();
+        app.calculateMean();
+
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            String jsonApp = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(app);
+            System.out.println(jsonApp);
+            return jsonApp;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
+    }
 
-        Calculator calc = new Calculator();
-        LinkedList list = new LinkedList(array);
-
-        String result = "Promedio:" +calc.calculateMean(list.toArray())+
-                        " Desviacion estandar: "+calc.calculateDeviation(list.toArray());
-        return result;
+    public static void prepareData(String[] list){
+        //String to Double
+        Double[] array = new Double[list.length];
+        for (int i = 0; i<list.length;i++){
+            array[i] = Double.parseDouble(list[i]);
+        }
+        app.setArray(array);
     }
 
     /**
@@ -54,21 +77,11 @@ public class SparkWebApp {
                 = "<!DOCTYPE html>"
                 + "<html>"
                 + "<body>"
-                + "<h2>CALCULADORA</h2>"
-                + "<p> Esta calculadora permite calcular Promedio y la desviacion estandar de los datos</p>"
+                + "<h2>BubbleSort</h2>"
+                + "<p> Ingrese los valores separados por comas</p>"
                 + "<form action=\"/processdata\">"
                 + "  Datos<br>"
-                + "  <input type=\"text\" name=\"number1\">"
-                + "  <br>"
-                + "  <input type=\"text\" name=\"number2\">"
-                + "  <br>"
-                + "  <input type=\"text\" name=\"number3\">"
-                + "  <br>"
-                + "  <input type=\"text\" name=\"number4\">"
-                + "  <br>"
-                + "  <input type=\"text\" name=\"number5\">"
-                + "  <br>"
-                + "  <input type=\"text\" name=\"number6\">"
+                + "  <input type=\"text\" name=\"value\">"
                 + "  <br>"
                 + "  <input type=\"submit\" value=\"Enviar\">"
                 + "</form>"

@@ -1,4 +1,4 @@
-# Taller de Introducción a Heroku
+# Parcial
 
 Arquitecturas Empresariales 2020-2
 
@@ -111,11 +111,5 @@ Apasionado por el desarrollo y la gestión de sistemas
 Para más información de la licencia ver LICENSE.md
 
 Para más proyectos, Sígueme y encuentra mis repositorios :D
-
-## Agradecimientos
-
-Felipe Portales-Oliva
-
-Johni0702
 
 
